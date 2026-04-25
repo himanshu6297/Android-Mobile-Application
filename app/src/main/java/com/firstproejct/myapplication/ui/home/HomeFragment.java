@@ -1,0 +1,76 @@
+package com.firstproejct.myapplication.ui.home;
+
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.firstproejct.myapplication.MenuPage1;
+import com.firstproejct.myapplication.R;
+import com.firstproejct.myapplication.databinding.FragmentHomeBinding;
+
+public class HomeFragment extends Fragment {
+
+    private FragmentHomeBinding binding;
+
+    AnimationDrawable manimation=new AnimationDrawable();
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        HomeViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        ImageView iv=binding.imageView2;
+        Button btn1=binding.button6;
+        Button btn2=binding.button8;
+        Button btn3=binding.button9;
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(getActivity(), MenuPage1.class);
+                startActivity(intent);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        BitmapDrawable frame1= (BitmapDrawable) getResources().getDrawable(R.drawable.a);
+        BitmapDrawable frame2= (BitmapDrawable) getResources().getDrawable(R.drawable.b);
+        BitmapDrawable frame3= (BitmapDrawable) getResources().getDrawable(R.drawable.c);
+        manimation.addFrame(frame1,1500);
+        manimation.addFrame(frame2,1500);
+        manimation.addFrame(frame3,1500);
+        iv.setBackgroundDrawable(manimation);
+        manimation.setOneShot(false);
+        manimation.start();
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+}
